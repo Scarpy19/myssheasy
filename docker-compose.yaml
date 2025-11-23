@@ -1,4 +1,4 @@
-version: "3"
+# version: "3"
 services:
 
   web:
@@ -33,45 +33,45 @@ services:
       - 6666:6666
     restart: always
 
-  prometheus:
-    image: prom/prometheus:v2.12.0
+  # prometheus:
+  #   image: prom/prometheus:v2.12.0
     # volumes:
     #   - ./prometheus/config/:/etc/prometheus/
     #   - ./prometheus/data:/prometheus
-    command:
-      - '--config.file=/etc/prometheus/prometheus.yml'
-      - '--storage.tsdb.path=/prometheus'
-    ports:
-      - 9090:9090
-    links:
-      - proxy
-    restart: always
+  #   command:
+  #     - '--config.file=/etc/prometheus/prometheus.yml'
+  #     - '--storage.tsdb.path=/prometheus'
+  #   ports:
+  #     - 9090:9090
+  #   links:
+  #     - proxy
+  #   restart: always
 
-  grafana:
-    image: grafana/grafana
-    links:
-      - prometheus
-    ports:
-      - 3000:3000
-    volumes:
-      # - ./grafana/data:/var/lib/grafana
-      - ./grafana/provisioning/:/etc/grafana/provisioning/
-    restart: always
+  # grafana:
+  #   image: grafana/grafana
+  #   links:
+  #     - prometheus
+  #   ports:
+  #     - 3000:3000
+  #   volumes:
+  #     # - ./grafana/data:/var/lib/grafana
+  #     - ./grafana/provisioning/:/etc/grafana/provisioning/
+  #   restart: always
 
-  testssh:
-    image: rastasheep/ubuntu-sshd:18.04
+  # testssh:
+  #   image: rastasheep/ubuntu-sshd:18.04
 
-  testopenssh:
-    image: linuxserver/openssh-server
-    environment:
-      - LOG_STDOUT=true
-    volumes:
-      - ./ssh_conf:/config
+  # testopenssh:
+  #   image: linuxserver/openssh-server
+  #   environment:
+  #     - LOG_STDOUT=true
+  #   volumes:
+  #     - ./ssh_conf:/config
 
-  websockify:
-    image: jwnmulder/websockify
-    ports:
-      - 2222:2222
-    command:
-      - '2222'
-      - 'testssh:22'
+  # websockify:
+  #   image: jwnmulder/websockify
+  #   ports:
+  #     - 2222:2222
+  #   command:
+  #     - '2222'
+  #     - 'testssh:22'
